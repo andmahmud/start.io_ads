@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash screen background color (matches the app seed color). -->
+    <color name="splash_background">#3D5AFE</color>
+	<color name="ic_launcher_background">#3D5AFE</color>
+</resources>
