@@ -26,26 +26,12 @@ class StartIoAdService {
   bool get isInitialized => _initialized;
   String get sdkVersion => _sdkVersion;
 
-  /// Reads the native SDK version. The SDK initializes in production mode by
-  /// default; test ads are only enabled automatically in debug builds when
-  /// explicitly requested via the `ENABLE_STARTIO_TEST_ADS` Dart define.
+  /// Reads the native SDK version. The SDK initializes in production mode;
+  /// no test-ads flag is ever set in this codebase.
   ///
   /// Safe to call multiple times; it is a no-op after the first success.
   Future<void> init() async {
     if (_initialized) return;
-
-    try {
-      const testAdsEnabled = kDebugMode &&
-          bool.fromEnvironment('ENABLE_STARTIO_TEST_ADS', defaultValue: true);
-      if (testAdsEnabled) {
-        await _sdk.setTestAdsEnabled(true);
-        if (kDebugMode) {
-          debugPrint('Start.io: Test ads enabled (debug build).');
-        }
-      }
-    } catch (error) {
-      debugPrint('Start.io: failed to enable test ads: $error');
-    }
 
     try {
       _sdkVersion = await _sdk.getSdkVersion();
